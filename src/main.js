@@ -3,6 +3,7 @@ import App from "./App.vue";
 import router from "./router";
 import upperFirst from "lodash/upperFirst";
 import camelCase from "lodash/camelCase";
+import { store } from "./store";
 
 const requireComponent = require.context(
   // The relative path of the components folder
@@ -41,5 +42,6 @@ Vue.config.productionTip = false;
 
 new Vue({
   router,
+  store,
   render: (h) => h(App),
 }).$mount("#app");
