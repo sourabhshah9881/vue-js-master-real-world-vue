@@ -2,7 +2,9 @@
   <div>
     <h1>Create an event, {{ user.name }}</h1>
     <p>This event was created by {{ user.id }}</p>
+    <p>{{ getEventById(2) }}</p>
     <!-- <p>{{ localComputed }}</p> -->
+    <p>There are {{ catLength }} categories</p>
     <ul>
       <li v-for="category in categories" :key="category">
         {{ category }}
@@ -12,7 +14,7 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { mapState, mapGetters } from "vuex";
 
 // export default {
 //   computed: mapState({
@@ -24,10 +26,19 @@ import { mapState } from "vuex";
 
 export default {
   computed: {
-    localComputed() {
-      return 1 + 2;
-    },
+    // getEvent() {
+    //   return this.$store.getters.getEventById;
+    // },
+
+    ...mapGetters(["getEventById"]),
     ...mapState(["user", "categories"]),
+
+    catLength() {
+      return this.$store.getters.catLength;
+    },
+    // ...mapState({
+    //   userName: (state) => state.user.name,
+    // }),
   },
 };
 </script>
