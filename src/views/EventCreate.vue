@@ -72,7 +72,7 @@ export default {
   },
   methods: {
     createFreshEventObject() {
-      const user = this.$store.state.user;
+      const user = this.$store.state.user.user;
       const id = Math.floor(Math.random() * 1000000);
       return {
         id,
@@ -90,7 +90,7 @@ export default {
 
     createEvent() {
       this.$store
-        .dispatch("createEvent", this.event)
+        .dispatch("event/createEvent", this.event)
         .then(() => {
           this.$router.push({
             name: "event-show",
@@ -98,8 +98,8 @@ export default {
           });
           this.event = this.createFreshEventObject();
         })
-        .catch((error) => {
-          console.log("some error occured while creating event", +error);
+        .catch(() => {
+          // console.log("some error occured while creating event", +error);
         });
     },
   },
