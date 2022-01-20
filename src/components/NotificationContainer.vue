@@ -1,6 +1,6 @@
 <template>
   <div class="notification-container">
-    <notification-bar
+    <NotificationBar
       v-for="notification in notifications"
       :key="notification.id"
       :notification="notification"
@@ -9,19 +9,18 @@
 </template>
 
 <script>
-import NotificationBar from "@/components/NotificationBar.vue";
-import { mapState } from "vuex";
+import NotificationBar from '@/components/NotificationBar.vue'
+import { mapState } from 'vuex'
+
 export default {
   components: {
-    NotificationBar,
+    NotificationBar
   },
-  computed: {
-    ...mapState("notification", ["notifications"]),
-  },
-};
+  computed: mapState('notification', ['notifications'])
+}
 </script>
 
-<style lang="scss" scoped>
+<style scoped>
 .notification-container {
   position: fixed;
   bottom: 0;
