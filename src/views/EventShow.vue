@@ -32,22 +32,31 @@
   </div>
 </template>
 <script>
-import { mapState, mapActions } from "vuex";
+import { mapState } from "vuex";
+import { store } from "../store/store.js";
+import nProgress from "nprogress";
 export default {
   props: ["id"],
-  created() {
-    // this.$store.dispatch("event/fetchEvent", this.id);
-    this.fetchEvent(this.id);
+  beforeRouteEnter(routeTo, routeFrom, next) {
+    nProgress.start();
+    store.dispatch("event/fetchEvent", routeTo.params.id).then(() => {
+      nProgress.done();
+      next();
+    });
   },
+  // created() {
+  //   // this.$store.dispatch("event/fetchEvent", this.id);
+  //   this.fetchEvent(this.id);
+  // },
   computed: {
     // ...mapState(["event"]),
     ...mapState({
       event: (state) => state.event.event,
     }),
   },
-  methods: {
-    ...mapActions("event", ["fetchEvent"]),
-  },
+  // methods: {
+  //   ...mapActions("event", ["fetchEvent"]),
+  // },
 };
 </script>
 <style scoped>
